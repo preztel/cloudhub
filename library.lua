@@ -65,7 +65,7 @@ local UIPadding = Instance.new("UIPadding")
 
 local TweenService = game:GetService("TweenService")
 
-uiui.Name = "uiui"
+uiui.Name = "AzureLibCloudHub"
 uiui.Parent = game:GetService("CoreGui")
 uiui.DisplayOrder = 1
 
