@@ -77,7 +77,7 @@ background.Size = UDim2.new(0, 1234, 0, 664)
 
 UIListLayout.Parent = background
 UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-UIListLayout.Padding = UDim.new(0, 0)
+UIListLayout.Padding = UDim.new(0, 5)
 
 UIPadding.Parent = background
 UIPadding.PaddingLeft = UDim.new(0, 10)
