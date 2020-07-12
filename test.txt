@@ -1,5 +1,0 @@
-function a()
-print("testing.")
-end
-
-a()
