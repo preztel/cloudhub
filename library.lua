@@ -28,7 +28,7 @@ local theme = {
     Dropdown_Text_Color = Color3.fromRGB(255, 255, 255),
     Dropdown_Option_BorderSize = 0,
     Dropdown_Option_BorderColor = Color3.fromRGB(49, 50, 51),
-    Dropdown_Option_Color = Color3.fromRGB(61, 62, 63),
+    Dropdown_Option_Color = Color3.fromRGB(51, 52, 53),
     Dropdown_Option_Text_Color = Color3.fromRGB(255, 255, 255),
     TextBox_Text_Color = Color3.fromRGB(255, 255, 255),
     TextBox_Color = Color3.fromRGB(31, 32, 33),
@@ -130,7 +130,7 @@ function library:CreateTab(text, desc, mode)
     Tab.Image = "rbxassetid://3570695787"
     Tab.ScaleType = Enum.ScaleType.Slice
     Tab.SliceCenter = Rect.new(100, 100, 100, 100)
-    Tab.SliceScale = 0.030
+    Tab.SliceScale = 0.07
     local HoverEffect = true
     local IsOpen = false
     Tab.MouseEnter:Connect(
@@ -180,7 +180,7 @@ function library:CreateTab(text, desc, mode)
     description.Image = "rbxassetid://3570695787"
     description.ScaleType = Enum.ScaleType.Slice
     description.SliceCenter = Rect.new(100, 100, 100, 100)
-    description.SliceScale = 0.030
+    description.SliceScale = 0.07
 
     descriptionText.Name = "descriptionText"
     descriptionText.Parent = description
@@ -206,7 +206,7 @@ function library:CreateTab(text, desc, mode)
     container.Image = "rbxassetid://3570695787"
     container.ScaleType = Enum.ScaleType.Slice
     container.SliceCenter = Rect.new(100, 100, 100, 100)
-    container.SliceScale = 0.030
+    container.SliceScale = 0.07
     local HoverEffect = true
     Tab.MouseButton1Click:Connect(
         function()
@@ -515,7 +515,7 @@ function library:CreateTab(text, desc, mode)
         DropdownOpen.Font = Enum.Font.SourceSans
         DropdownOpen.Text = "+"
         DropdownOpen.TextColor3 = theme.Dropdown_Text_Color
-        DropdownOpen.TextSize = 16.000
+        DropdownOpen.TextSize = 18.000
 
         UIListLayout_2.Parent = Dropdown
         UIListLayout_2.SortOrder = Enum.SortOrder.LayoutOrder
