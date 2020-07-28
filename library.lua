@@ -118,7 +118,7 @@ function library:CreateTab(text, desc, mode)
         game:GetService("TextService"):GetTextSize(
         desc,
         14,
-        Enum.Font.SourceSansLight,
+        Enum.Font.SourceSansBold,
         Vector2.new(math.huge, math.huge)
     )
 
@@ -164,7 +164,7 @@ function library:CreateTab(text, desc, mode)
     tabtext.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     tabtext.BackgroundTransparency = 1.000
     tabtext.Size = UDim2.new(0, 155, 0, 30)
-    tabtext.Font = Enum.Font.SourceSansLight
+    tabtext.Font = Enum.Font.SourceSansBold
     tabtext.Text = text
     tabtext.TextColor3 = theme.Tab_Text_Color
     tabtext.TextSize = 16.000
@@ -188,7 +188,7 @@ function library:CreateTab(text, desc, mode)
     descriptionText.BackgroundTransparency = 1.000
     descriptionText.Position = UDim2.new(0, 0, 0.022590382, 0)
     descriptionText.Size = UDim2.new(0, TextBounds.X + 20, 0, 30)
-    descriptionText.Font = Enum.Font.SourceSansLight
+    descriptionText.Font = Enum.Font.SourceSansBold
     descriptionText.Text = desc
     descriptionText.TextColor3 = theme.Description_Text_Color
     descriptionText.TextSize = 14.000
@@ -307,7 +307,7 @@ function library:CreateTab(text, desc, mode)
         ToggleText.BackgroundTransparency = 1.000
         ToggleText.Position = UDim2.new(0.149729788, 0, 0, 0)
         ToggleText.Size = UDim2.new(0, 157, 0, 30)
-        ToggleText.Font = Enum.Font.SourceSansLight
+        ToggleText.Font = Enum.Font.SourceSansBold
         ToggleText.Text = "   " .. text
         ToggleText.TextColor3 = theme.Toggle_Text_Color
         ToggleText.TextSize = 16.000
@@ -390,8 +390,8 @@ function library:CreateTab(text, desc, mode)
         SliderText.BackgroundTransparency = 1.000
         SliderText.Position = UDim2.new(0.0362162739, 0, -0.0666666701, 0)
         SliderText.Size = UDim2.new(0, 157, 0, 30)
-        SliderText.Font = Enum.Font.SourceSansLight
-        SliderText.Text = text .. " / " .. minvalue
+        SliderText.Font = Enum.Font.SourceSansBold
+        SliderText.Text = text .. " | " .. minvalue
         SliderText.TextColor3 = theme.Slider_Text_Color
         SliderText.TextSize = 16.000
         SliderText.TextXAlignment = Enum.TextXAlignment.Left
@@ -417,12 +417,12 @@ function library:CreateTab(text, desc, mode)
         Slider.MouseButton1Down:Connect(function()
             down = true
             Value = math.floor((((tonumber(maxvalue) - tonumber(minvalue)) / 172) * SliderInner.AbsoluteSize.X) +tonumber(minvalue)) or 0
-            SliderText.Text = text .. " / " .. Value
+            SliderText.Text = text .. " | " .. Value
 			pcall(callback, Value)
             SliderInner:TweenSize(UDim2.new(0, math.clamp(mouse.X - SliderInner.AbsolutePosition.X, 0, 172), 0, 9), Enum.EasingDirection.InOut, Enum.EasingStyle.Linear, .07)
             while game:GetService("RunService").RenderStepped:wait() and down do
                 Value = math.floor((((tonumber(maxvalue) - tonumber(minvalue)) / 172) * SliderInner.AbsoluteSize.X) +tonumber(minvalue)) or 0
-				SliderText.Text = text .. " / " .. Value                
+				SliderText.Text = text .. " | " .. Value                
 				pcall(callback, Value)
                 SliderInner:TweenSize(UDim2.new(0, math.clamp(mouse.X - SliderInner.AbsolutePosition.X, 0, 172), 0, 9), Enum.EasingDirection.InOut, Enum.EasingStyle.Linear, .07)
             end
@@ -432,7 +432,7 @@ function library:CreateTab(text, desc, mode)
 			if key.UserInputType == Enum.UserInputType.MouseButton1 and down then
 	            down = false
 	            Value = math.floor((((tonumber(maxvalue) - tonumber(minvalue)) / 172) * SliderInner.AbsoluteSize.X) +tonumber(minvalue)) or 0
-	            SliderText.Text = text .. " / " .. Value
+	            SliderText.Text = text .. " | " .. Value
 				pcall(callback, Value)
 	            SliderInner:TweenSize(UDim2.new(0, math.clamp(mouse.X - SliderInner.AbsolutePosition.X, 0, 172), 0, 9), Enum.EasingDirection.InOut, Enum.EasingStyle.Linear, 0.1)
 			end        
@@ -500,7 +500,7 @@ function library:CreateTab(text, desc, mode)
         DropdownText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
         DropdownText.BackgroundTransparency = 1.000
         DropdownText.Size = UDim2.new(0, 155, 0, 30)
-        DropdownText.Font = Enum.Font.SourceSansLight
+        DropdownText.Font = Enum.Font.SourceSansBold
         DropdownText.Text = "  " .. text .. " | " .. ""
         DropdownText.TextColor3 = theme.Dropdown_Text_Color
         DropdownText.TextSize = 16.000
@@ -530,7 +530,7 @@ function library:CreateTab(text, desc, mode)
             Option1.BackgroundTransparency = 0
             Option1.Position = UDim2.new(0, 0, 0.5, 0)
             Option1.Size = UDim2.new(0, 184, 0, 30)
-            Option1.Font = Enum.Font.SourceSansLight
+            Option1.Font = Enum.Font.SourceSansBold
             Option1.Text = v
             Option1.TextColor3 = theme.Dropdown_Option_Text_Color
             Option1.TextSize = 16.000
@@ -676,7 +676,7 @@ function library:CreateTab(text, desc, mode)
         Button.BackgroundTransparency = 1.000
         Button.Position = UDim2.new(0, 0, 0.777777851, 0)
         Button.Size = UDim2.new(0, 185, 0, 30)
-        Button.Font = Enum.Font.SourceSansLight
+        Button.Font = Enum.Font.SourceSansBold
         Button.Text = text
         Button.TextColor3 = theme.Button_Text_Color
         Button.TextSize = 16.000
@@ -707,7 +707,7 @@ function library:CreateTab(text, desc, mode)
 		TextBox.Position = UDim2.new(0, 0, 0.818181813, 0)
 		TextBox.Size = UDim2.new(0, 185, 0, 30)
 		TextBox.ClearTextOnFocus = false
-		TextBox.Font = Enum.Font.SourceSansLight
+		TextBox.Font = Enum.Font.SourceSansBold
 		TextBox.PlaceholderColor3 = theme.TextBox_Text_Color
 		TextBox.PlaceholderText = string
 		TextBox.Text = ""
