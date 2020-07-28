@@ -62,8 +62,6 @@ local dark_theme = {
     TextBox_Underline_Color = Color3.fromRGB(255, 92, 92)
 }
 
-if game:GetService("CoreGui"):FindFirstChild("uiui") then game:GetService("CoreGui"):FindFirstChild("uiui"):Destroy() end
-
 local library = {}
 local uiui = Instance.new("ScreenGui")
 local background = Instance.new("Frame")
