@@ -1,13 +1,12 @@
 --[[
-using azure lib, not made by me kthxcya.
+
+   __    ____  __  __  ____  ____ 
+  /__\  (_   )(  )(  )(  _ \( ___)
+ /(__)\  / /_  )(__)(  )   / )__) 
+(__)(__)(____)(______)(_)\_)(____) 
+
+              
 ]]--
-
-
-if syn then
-    pcall(function()
-        syn.protect_gui(game:GetService("CoreGui"))
-    end)
-end
 
 --light theme
 local theme = {
@@ -25,12 +24,15 @@ local theme = {
     Slider_Bar_Color = Color3.fromRGB(243, 243, 243),
     Slider_Inner_Color = Color3.fromRGB(94, 255, 180),
     Slider_Text_Color = Color3.fromRGB(0, 0, 0),
-	Slider_Border_Color = Color3.fromRGB(255, 255, 255),
+    Slider_Border_Color = Color3.fromRGB(255, 255, 255),
     Dropdown_Text_Color = Color3.fromRGB(0, 0, 0),
     Dropdown_Option_BorderSize = 1,
     Dropdown_Option_BorderColor = Color3.fromRGB(235, 235, 235),
     Dropdown_Option_Color = Color3.fromRGB(255, 255, 255),
-    Dropdown_Option_Text_Color = Color3.fromRGB(0, 0, 0)
+    Dropdown_Option_Text_Color = Color3.fromRGB(0, 0, 0),
+    TextBox_Text_Color = Color3.fromRGB(0, 0, 0),
+    TextBox_Color = Color3.fromRGB(255, 255, 255),
+    TextBox_Underline_Color = Color3.fromRGB(94, 255, 180)
 }
 
 --dark theme
@@ -49,13 +51,18 @@ local dark_theme = {
     Slider_Bar_Color = Color3.fromRGB(31, 32, 33),
     Slider_Inner_Color = Color3.fromRGB(255, 92, 92),
     Slider_Text_Color = Color3.fromRGB(255, 255, 255),
-	Slider_Border_Color = Color3.fromRGB(50, 49, 50),
+    Slider_Border_Color = Color3.fromRGB(50, 49, 50),
     Dropdown_Text_Color = Color3.fromRGB(255, 255, 255),
     Dropdown_Option_BorderSize = 1,
     Dropdown_Option_BorderColor = Color3.fromRGB(49, 50, 51),
     Dropdown_Option_Color = Color3.fromRGB(31, 32, 33),
-    Dropdown_Option_Text_Color = Color3.fromRGB(255, 255, 255)
+    Dropdown_Option_Text_Color = Color3.fromRGB(255, 255, 255),
+    TextBox_Text_Color = Color3.fromRGB(255, 255, 255),
+    TextBox_Color = Color3.fromRGB(31, 32, 33),
+    TextBox_Underline_Color = Color3.fromRGB(255, 92, 92)
 }
+
+if game:GetService("CoreGui"):FindFirstChild("uiui") then game:GetService("CoreGui"):FindFirstChild("uiui"):Destroy() end
 
 local library = {}
 local uiui = Instance.new("ScreenGui")
@@ -65,7 +72,7 @@ local UIPadding = Instance.new("UIPadding")
 
 local TweenService = game:GetService("TweenService")
 
-uiui.Name = "AzureLibCloudHub"
+uiui.Name = "uiui"
 uiui.Parent = game:GetService("CoreGui")
 uiui.DisplayOrder = 1
 
@@ -77,17 +84,21 @@ background.Size = UDim2.new(0, 1234, 0, 664)
 
 UIListLayout.Parent = background
 UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-UIListLayout.Padding = UDim.new(0, 5)
+UIListLayout.Padding = UDim.new(0, 10)
 
 UIPadding.Parent = background
 UIPadding.PaddingLeft = UDim.new(0, 10)
 UIPadding.PaddingTop = UDim.new(0, 10)
 
 function library:CreateTab(text, desc, mode)
+    text = text or ""
+    desc = desc or ""
+    mode = mode or false
+	
     if mode then
         theme = dark_theme
-	elseif mode == nil then
-		theme = _G.CustomTheme
+    elseif mode == nil then
+        theme = _G.CustomTheme
     end
     local Tab = Instance.new("ImageButton")
     local tabtext = Instance.new("TextLabel")
@@ -108,8 +119,8 @@ function library:CreateTab(text, desc, mode)
     local TextBounds =
         game:GetService("TextService"):GetTextSize(
         desc,
-        18,
-        Enum.Font.SourceSansBold,
+        14,
+        Enum.Font.SourceSansLight,
         Vector2.new(math.huge, math.huge)
     )
 
@@ -155,10 +166,10 @@ function library:CreateTab(text, desc, mode)
     tabtext.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     tabtext.BackgroundTransparency = 1.000
     tabtext.Size = UDim2.new(0, 155, 0, 30)
-    tabtext.Font = Enum.Font.SourceSansBold
+    tabtext.Font = Enum.Font.SourceSansLight
     tabtext.Text = text
     tabtext.TextColor3 = theme.Tab_Text_Color
-    tabtext.TextSize = 20.000
+    tabtext.TextSize = 16.000
 
     description.Name = "description"
     description.Parent = Tab
@@ -179,10 +190,10 @@ function library:CreateTab(text, desc, mode)
     descriptionText.BackgroundTransparency = 1.000
     descriptionText.Position = UDim2.new(0, 0, 0.022590382, 0)
     descriptionText.Size = UDim2.new(0, TextBounds.X + 20, 0, 30)
-    descriptionText.Font = Enum.Font.SourceSansBold
+    descriptionText.Font = Enum.Font.SourceSansLight
     descriptionText.Text = desc
     descriptionText.TextColor3 = theme.Description_Text_Color
-    descriptionText.TextSize = 18.000
+    descriptionText.TextSize = 14.000
 
     local BodyYSize = 0
 
@@ -298,7 +309,7 @@ function library:CreateTab(text, desc, mode)
         ToggleText.BackgroundTransparency = 1.000
         ToggleText.Position = UDim2.new(0.149729788, 0, 0, 0)
         ToggleText.Size = UDim2.new(0, 157, 0, 30)
-        ToggleText.Font = Enum.Font.SourceSansBold
+        ToggleText.Font = Enum.Font.SourceSansLight
         ToggleText.Text = "   " .. text
         ToggleText.TextColor3 = theme.Toggle_Text_Color
         ToggleText.TextSize = 16.000
@@ -328,7 +339,30 @@ function library:CreateTab(text, desc, mode)
             end
         )
 
+			
+		local aa = {}
+
+		function aa:Set(bool)
+			if bool then
+				Toggled = true
+				TweenService:Create(
+                    ToggleInner,
+                    TweenInfo.new(0.1, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
+                    {Size = UDim2.new(0, 20, 0, 20)}
+                ):Play()
+			else
+				Toggled = false
+				TweenService:Create(
+                    ToggleInner,
+                    TweenInfo.new(0.1, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
+                    {Size = UDim2.new(0, 0, 0, 0)}
+                ):Play()
+			end
+		end
+
         resize(30)
+
+		return aa;
     end
     function s:CreateSlider(text, minvalue, maxvalue, callback)
         text = text or ""
@@ -358,7 +392,7 @@ function library:CreateTab(text, desc, mode)
         SliderText.BackgroundTransparency = 1.000
         SliderText.Position = UDim2.new(0.0362162739, 0, -0.0666666701, 0)
         SliderText.Size = UDim2.new(0, 157, 0, 30)
-        SliderText.Font = Enum.Font.SourceSansBold
+        SliderText.Font = Enum.Font.SourceSansLight
         SliderText.Text = text .. " / " .. minvalue
         SliderText.TextColor3 = theme.Slider_Text_Color
         SliderText.TextSize = 16.000
@@ -405,10 +439,36 @@ function library:CreateTab(text, desc, mode)
 	            SliderInner:TweenSize(UDim2.new(0, math.clamp(mouse.X - SliderInner.AbsolutePosition.X, 0, 172), 0, 9), Enum.EasingDirection.InOut, Enum.EasingStyle.Linear, 0.1)
 			end        
 		end)
+	
+		local ss = {}
+
+		function ss:Set(SliderAmount)
+			SliderAmount = tonumber(SliderAmount) or 0
+			SliderAmount = (((SliderAmount >= 0 and SliderAmount <= 100) and SliderAmount) / 100)
+			TweenService:Create(
+                SliderInner,
+                TweenInfo.new(0.1, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
+                {Size = UDim2.new(SliderAmount or 0, 0, 0, 9)}
+            ):Play()
+			local p = math.floor((SliderAmount or 0) * 100)
+			
+			local difference = maxvalue - minvalue
+			
+			local Value = math.floor(((difference / 100) * p) + minvalue)
+
+			SliderText.Text = text .. " / " .. Value
+			pcall(callback, Value)
+		end
+
+
         resize(45)
+
+		return ss
     end
     function s:CreateDropDown(text, list, callback)
+		callback = callback or function() end
         text = text or ""
+		list = list or {}
         resize(30)
         local IsDropped = false
         local DropYSize = 0
@@ -442,7 +502,7 @@ function library:CreateTab(text, desc, mode)
         DropdownText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
         DropdownText.BackgroundTransparency = 1.000
         DropdownText.Size = UDim2.new(0, 155, 0, 30)
-        DropdownText.Font = Enum.Font.SourceSansBold
+        DropdownText.Font = Enum.Font.SourceSansLight
         DropdownText.Text = "  " .. text .. " / " .. ""
         DropdownText.TextColor3 = theme.Dropdown_Text_Color
         DropdownText.TextSize = 16.000
@@ -464,7 +524,7 @@ function library:CreateTab(text, desc, mode)
 
         for i, v in next, list do
             local Option1 = Instance.new("TextButton")
-            Option1.Name = v .. "Option"
+            Option1.Name = "Option1"
             Option1.Parent = Dropdown
             Option1.BackgroundColor3 = theme.Dropdown_Option_Color
             Option1.BorderColor3 = theme.Dropdown_Option_BorderColor
@@ -472,7 +532,7 @@ function library:CreateTab(text, desc, mode)
             Option1.BackgroundTransparency = 0
             Option1.Position = UDim2.new(0, 0, 0.5, 0)
             Option1.Size = UDim2.new(0, 184, 0, 30)
-            Option1.Font = Enum.Font.SourceSansBold
+            Option1.Font = Enum.Font.SourceSansLight
             Option1.Text = v
             Option1.TextColor3 = theme.Dropdown_Option_Text_Color
             Option1.TextSize = 16.000
@@ -508,6 +568,7 @@ function library:CreateTab(text, desc, mode)
                         TweenInfo.new(0.1, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
                         {Size = UDim2.new(0, 184, 0, 30)}
                     ):Play()
+					
                     TweenService:Create(
                         container,
                         TweenInfo.new(0.1, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
@@ -547,18 +608,77 @@ function library:CreateTab(text, desc, mode)
                 ):Play()
             end
         )
+
+		--[[local ssss = {}
+
+		function ssss:Add(name)
+	            local Option1 = Dropdown:FindFirstChild("Option1"):Clone()
+	            Option1.Name = "Option1"
+	            Option1.Parent = Dropdown
+	            Option1.BackgroundColor3 = theme.Dropdown_Option_Color
+	            Option1.BorderColor3 = theme.Dropdown_Option_BorderColor
+	            Option1.BorderSizePixel = theme.Dropdown_Option_BorderSize
+	            Option1.BackgroundTransparency = 0
+	            Option1.Position = UDim2.new(0, 0, 0.5, 0)
+	            Option1.Size = UDim2.new(0, 184, 0, 30)
+	            Option1.Font = Enum.Font.SourceSansLight
+	            Option1.Text = name
+	            Option1.TextColor3 = theme.Dropdown_Option_Text_Color
+	            Option1.TextSize = 16.000
+	            Option1.AutoButtonColor = false
+	            DropYSize = DropYSize + 30
+	
+	            Option1.MouseButton1Click:Connect(
+	                function()
+	                    callback(name)
+	                    DropdownText.Text = "  " .. text .. " / " .. name
+	                    TweenService:Create(
+	                        Dropdown,
+	                        TweenInfo.new(0.1, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
+	                        {Size = UDim2.new(0, 184, 0, 30)}
+	                    ):Play()
+	                    TweenService:Create(
+	                        container,
+	                        TweenInfo.new(0.1, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
+	                        {Size = UDim2.new(0, 185, 0, BodyYSize)}
+	                    ):Play()
+	                    IsDropped = false
+	                    DropdownOpen.Text = "+"
+	                end
+	            )
+			if IsDropped then
+                    TweenService:Create(
+                        Dropdown,
+                        TweenInfo.new(0.1, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
+                        {Size = UDim2.new(0, 184, 0, DropYSize + 30)}
+                    ):Play()
+					TweenService:Create(
+                        container,
+                        TweenInfo.new(0.1, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
+                        {Size = UDim2.new(0, 184, 0, BodyYSize + DropYSize)}
+                    ):Play()
+                end
+			local s2 = {}
+
+			function s2:Remove()
+				Option1:Destroy()
+			end
+		end
+
+		return ssss;]]
     end
     function s:CreateButton(text, callback)
+		text = text or ""
         callback = callback or function()
             end
         local Button = Instance.new("TextButton")
-        Button.Name = "Button"
+        Button.Name = text
         Button.Parent = container
         Button.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
         Button.BackgroundTransparency = 1.000
         Button.Position = UDim2.new(0, 0, 0.777777851, 0)
         Button.Size = UDim2.new(0, 185, 0, 30)
-        Button.Font = Enum.Font.SourceSansBold
+        Button.Font = Enum.Font.SourceSansLight
         Button.Text = text
         Button.TextColor3 = theme.Button_Text_Color
         Button.TextSize = 16.000
@@ -575,6 +695,55 @@ function library:CreateTab(text, desc, mode)
         )
         resize(30)
     end
+
+	function s:CreateTextBox(string, callback)
+		resize(30)
+		string = string or ""
+		callback = callback or function() end
+		local TextBox = Instance.new("TextBox")
+		local TextboxUnderline = Instance.new("Frame")
+		
+		TextBox.Parent = container
+		TextBox.BackgroundColor3 = theme.TextBox_Color
+		TextBox.BorderSizePixel = 0
+		TextBox.Position = UDim2.new(0, 0, 0.818181813, 0)
+		TextBox.Size = UDim2.new(0, 185, 0, 30)
+		TextBox.ClearTextOnFocus = false
+		TextBox.Font = Enum.Font.SourceSansLight
+		TextBox.PlaceholderColor3 = theme.TextBox_Text_Color
+		TextBox.PlaceholderText = string
+		TextBox.Text = ""
+		TextBox.TextColor3 = theme.TextBox_Text_Color
+		TextBox.TextSize = 15.000
+		TextBox.Focused:Connect(function()
+			TextboxUnderline:TweenSize(UDim2.new(0,185,0,2), Enum.EasingDirection.InOut, Enum.EasingStyle.Quad, 0.1)
+		end)
+		TextBox.FocusLost:Connect(function(enterpressed)
+			if enterpressed then
+				TextboxUnderline:TweenSize(UDim2.new(0,0,0,2), Enum.EasingDirection.InOut, Enum.EasingStyle.Quad, 0.1)
+				callback(TextBox.Text)
+				TextBox.Text = ""
+			else
+				TextboxUnderline:TweenSize(UDim2.new(0,0,0,2), Enum.EasingDirection.InOut, Enum.EasingStyle.Quad, 0.1)
+			end
+		end)
+		
+		TextboxUnderline.Name = "TextboxUnderline"
+		TextboxUnderline.Parent = TextBox
+		TextboxUnderline.AnchorPoint = Vector2.new(0.5, 0.5)
+		TextboxUnderline.BackgroundColor3 = theme.TextBox_Underline_Color
+		TextboxUnderline.BorderSizePixel = 0
+		TextboxUnderline.Position = UDim2.new(0.50075686, 0, 0.966666639, 0)
+		TextboxUnderline.Size = UDim2.new(0, 0, 0, 2)
+
+		local TextBoxInfo = {}
+
+		function TextBoxInfo:Edit(text)
+			TextBox.Text = text
+		end
+
+		return TextBoxInfo
+	end
     return s
 end
 return library
