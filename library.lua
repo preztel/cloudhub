@@ -17,18 +17,18 @@ local theme = {
     Container_Color = Color3.fromRGB(31, 32, 33),
     Container_Text_Color = Color3.fromRGB(255, 255, 255),
     Button_Text_Color = Color3.fromRGB(255, 255, 255),
-    Toggle_Box_Color = Color3.fromRGB(31, 32, 33),
-    Toggle_Inner_Color = Color3.fromRGB(255, 92, 92),
+    Toggle_Box_Color = Color3.fromRGB(255, 92, 92),
+    Toggle_Inner_Color = Color3.fromRGB(92, 255, 97),
     Toggle_Text_Color = Color3.fromRGB(255, 255, 255),
     Toggle_Border_Color = Color3.fromRGB(50, 49, 50),
     Slider_Bar_Color = Color3.fromRGB(31, 32, 33),
-    Slider_Inner_Color = Color3.fromRGB(255, 92, 92),
+    Slider_Inner_Color = Color3.fromRGB(117, 117, 117),
     Slider_Text_Color = Color3.fromRGB(255, 255, 255),
     Slider_Border_Color = Color3.fromRGB(50, 49, 50),
     Dropdown_Text_Color = Color3.fromRGB(255, 255, 255),
-    Dropdown_Option_BorderSize = 1,
+    Dropdown_Option_BorderSize = 0,
     Dropdown_Option_BorderColor = Color3.fromRGB(49, 50, 51),
-    Dropdown_Option_Color = Color3.fromRGB(31, 32, 33),
+    Dropdown_Option_Color = Color3.fromRGB(61, 62, 63),
     Dropdown_Option_Text_Color = Color3.fromRGB(255, 255, 255),
     TextBox_Text_Color = Color3.fromRGB(255, 255, 255),
     TextBox_Color = Color3.fromRGB(31, 32, 33),
@@ -82,7 +82,7 @@ background.Size = UDim2.new(0, 1234, 0, 664)
 
 UIListLayout.Parent = background
 UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-UIListLayout.Padding = UDim.new(0, 10)
+UIListLayout.Padding = UDim.new(0, 6)
 
 UIPadding.Parent = background
 UIPadding.PaddingLeft = UDim.new(0, 10)
@@ -501,7 +501,7 @@ function library:CreateTab(text, desc, mode)
         DropdownText.BackgroundTransparency = 1.000
         DropdownText.Size = UDim2.new(0, 155, 0, 30)
         DropdownText.Font = Enum.Font.SourceSansLight
-        DropdownText.Text = "  " .. text .. " / " .. ""
+        DropdownText.Text = "  " .. text .. " | " .. ""
         DropdownText.TextColor3 = theme.Dropdown_Text_Color
         DropdownText.TextSize = 16.000
         DropdownText.TextXAlignment = Enum.TextXAlignment.Left
@@ -515,7 +515,7 @@ function library:CreateTab(text, desc, mode)
         DropdownOpen.Font = Enum.Font.SourceSans
         DropdownOpen.Text = "+"
         DropdownOpen.TextColor3 = theme.Dropdown_Text_Color
-        DropdownOpen.TextSize = 14.000
+        DropdownOpen.TextSize = 16.000
 
         UIListLayout_2.Parent = Dropdown
         UIListLayout_2.SortOrder = Enum.SortOrder.LayoutOrder
@@ -540,7 +540,7 @@ function library:CreateTab(text, desc, mode)
             Option1.MouseButton1Click:Connect(
                 function()
                     callback(v)
-                    DropdownText.Text = "  " .. text .. " / " .. v
+                    DropdownText.Text = "  " .. text .. " | " .. v
                     TweenService:Create(
                         Dropdown,
                         TweenInfo.new(0.1, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
@@ -575,7 +575,7 @@ function library:CreateTab(text, desc, mode)
                 else
                     IsDropped = true
                     DropdownOpen.Text = "-"
-                    DropdownText.Text = "  " .. text .. " / "
+                    DropdownText.Text = "  " .. text .. " | "
                     TweenService:Create(
                         Dropdown,
                         TweenInfo.new(0.1, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
