@@ -72,7 +72,7 @@ local UIPadding = Instance.new("UIPadding")
 
 local TweenService = game:GetService("TweenService")
 
-uiui.Name = "uiui"
+uiui.Name = "AzureLibCloudHub"
 uiui.Parent = game:GetService("CoreGui")
 uiui.DisplayOrder = 1
 
@@ -89,7 +89,7 @@ UIListLayout.Padding = UDim.new(0, 10)
 UIPadding.Parent = background
 UIPadding.PaddingLeft = UDim.new(0, 10)
 UIPadding.PaddingTop = UDim.new(0, 10)
-
+mode = nil
 function library:CreateTab(text, desc, mode)
     text = text or ""
     desc = desc or ""
