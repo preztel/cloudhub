@@ -31,8 +31,8 @@ local theme = {
     Dropdown_Option_Color = Color3.fromRGB(41, 42, 43),
     Dropdown_Option_Text_Color = Color3.fromRGB(255, 255, 255),
     TextBox_Text_Color = Color3.fromRGB(255, 255, 255),
-    TextBox_Color = Color3.fromRGB(31, 32, 33),
-    TextBox_Underline_Color = Color3.fromRGB(255, 92, 92)
+    TextBox_Color = Color3.fromRGB(41, 42, 43),
+    TextBox_Underline_Color = Color3.fromRGB(92, 255, 97)
 }
 
 --dark theme
