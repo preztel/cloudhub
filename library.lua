@@ -454,7 +454,7 @@ function library:CreateTab(text, desc, mode)
 			
 			local Value = math.floor(((difference / 100) * p) + minvalue)
 
-			SliderText.Text = text .. " / " .. Value
+			SliderText.Text = text .. " | " .. Value
 			pcall(callback, Value)
 		end
 
@@ -515,7 +515,7 @@ function library:CreateTab(text, desc, mode)
         DropdownOpen.Font = Enum.Font.SourceSans
         DropdownOpen.Text = "+"
         DropdownOpen.TextColor3 = theme.Dropdown_Text_Color
-        DropdownOpen.TextSize = 18.000
+        DropdownOpen.TextSize = 26.000
 
         UIListLayout_2.Parent = Dropdown
         UIListLayout_2.SortOrder = Enum.SortOrder.LayoutOrder
